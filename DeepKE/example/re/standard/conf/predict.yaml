@@ -1,0 +1,3 @@
+# @package _global_
+# the path of the model / checkpoint to be used
+fp: '/root/KG/DeepKE/example/re/standard/checkpoints/2025-07-24_18-19-36/gcn_epoch100.pth'

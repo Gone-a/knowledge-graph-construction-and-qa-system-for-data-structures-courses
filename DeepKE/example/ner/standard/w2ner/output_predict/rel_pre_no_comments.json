@@ -1,0 +1,1026 @@
+[
+  {
+    "sentence": "其最大优势是快速访问，但缺点在于插入和删除操作效率较低，尤其是在数组中间进行插入或删除时，需要大量移动元素",
+    "head": "删除操作",
+    "tail": "数组",
+    "head_offset": "19",
+    "tail_offset": "32",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "数组的大小在定义时通常是固定的，因此对于动态变化的元素集合，不适用",
+    "head": "集合",
+    "tail": "数组",
+    "head_offset": "27",
+    "tail_offset": "0",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "如果需要频繁修改数据的大小，链表或动态数组（如 Vector、ArrayList）可能更为合适",
+    "head": "链表",
+    "tail": "数组",
+    "head_offset": "14",
+    "tail_offset": "19",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "链表是一种由节点构成的线性数据结构，每个节点包含数据元素以及指向下一个节点的指针",
+    "head": "节点",
+    "tail": "数据结构",
+    "head_offset": "35",
+    "tail_offset": "13",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "链表有单向链表、双向链表和循环链表等不同类型",
+    "head": "双向链表",
+    "tail": "链表",
+    "head_offset": "8",
+    "tail_offset": "10",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "在链表中，元素存储不需要连续的内存空间，因此可以动态调整大小，插入和删除操作在常数时间内完成",
+    "head": "删除操作",
+    "tail": "删除操",
+    "head_offset": "34",
+    "tail_offset": "34",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "与数组相比，链表的最大优点是插入和删除操作更高效，但其缺点是无法进行高效的随机访问，需要从头节点逐个遍历",
+    "head": "节点",
+    "tail": "数组",
+    "head_offset": "46",
+    "tail_offset": "1",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "链表常用于需要频繁插入删除的场景，如队列、栈等",
+    "head": "队列",
+    "tail": "链表",
+    "head_offset": "18",
+    "tail_offset": "0",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "栈与队列的不同之处在于操作顺序的不同，栈遵循 “最后进去，最先出来” 的原则",
+    "head": "栈",
+    "tail": "栈",
+    "head_offset": "0",
+    "tail_offset": "19",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "队列是一个先进先出（FIFO）的数据结构，元素从队列的一端入队，从另一端出队",
+    "head": "队列",
+    "tail": "数据结构",
+    "head_offset": "24",
+    "tail_offset": "16",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "常见的队列有普通队列、双端队列（deque）和循环队列等",
+    "head": "循环队列",
+    "tail": "队列",
+    "head_offset": "23",
+    "tail_offset": "3",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "队列广泛应用于资源调度、数据传输以及广度优先搜索（BFS）等场景",
+    "head": "广度优先搜索",
+    "tail": "队列",
+    "head_offset": "18",
+    "tail_offset": "0",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "而双端队列可以在两端进行插入和删除操作，具有更大的灵活性",
+    "head": "队列",
+    "tail": "删除操作",
+    "head_offset": "3",
+    "tail_offset": "15",
+    "relation": "被依赖关系"  
+  },
+  {
+    "sentence": "哈希表（也叫散列表）是一种通过哈希函数将数据映射到一个固定大小的数组中的数据结构",
+    "head": "哈希表",
+    "tail": "数组",
+    "head_offset": "0",
+    "tail_offset": "32",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "哈希表可以支持常数时间复杂度的查找、插入和删除操作",
+    "head": "哈希表",
+    "tail": "时间复杂度",
+    "head_offset": "0",
+    "tail_offset": "9",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "哈希表的核心在于哈希函数，它决定了数据在数组中的存储位置",
+    "head": "哈希表",
+    "tail": "数组",
+    "head_offset": "0",
+    "tail_offset": "20",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "哈希冲突发生时，需要采用链表法或开放寻址法等解决方案",
+    "head": "链表法",
+    "tail": "链表",
+    "head_offset": "12",
+    "tail_offset": "12",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "哈希表与树相比，查找和插入更为高效，但哈希表不能提供有序数据，因此在某些场景下，平衡树可能是更好的选择",
+    "head": "哈希表",
+    "tail": "哈希表",
+    "head_offset": "0",
+    "tail_offset": "19",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "树是一种分层的数据结构，由节点组成，每个节点包含数据和指向子节点的指针",
+    "head": "数据结构",
+    "tail": "节点",
+    "head_offset": "7",
+    "tail_offset": "13",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "树的最顶端节点叫做根节点，树中的每个节点有零个或多个子节点",
+    "head": "节点",
+    "tail": "子节点",
+    "head_offset": "18",
+    "tail_offset": "26",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "常见的树包括二叉树、平衡二叉树、红黑树、AVL 树、B 树等",
+    "head": "二叉树",
+    "tail": "AVL 树",
+    "head_offset": "6",
+    "tail_offset": "20",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "树的最大优点是支持高效的查找、插入和删除操作，尤其是在需要维护数据有序性的情况下，如二叉搜索树（BST）",
+    "head": "树",
+    "tail": "二叉搜索树",
+    "head_offset": "41",
+    "tail_offset": "37",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "图是一种由节点和边组成的非线性数据结构，其中节点代表实体，边代表实体之间的关系",
+    "head": "节点",
+    "tail": "边",
+    "head_offset": "5",
+    "tail_offset": "29",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "图可以分为有向图和无向图，边可以带权重，也可以不带权重",
+    "head": "边",
+    "tail": "无向图",
+    "head_offset": "13",
+    "tail_offset": "9",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "图的遍历操作有深度优先搜索（DFS）和广度优先搜索（BFS）等，图的最短路径算法（如 Dijkstra 算法、Bellman-Ford 算法）和最小生成树算法（如 Kruskal 算法、Prim 算法）也是图的重要应用",
+    "head": "最短路径",
+    "tail": "广度优先搜索",
+    "head_offset": "34",
+    "tail_offset": "19",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "堆是一种完全二叉树结构，它满足堆性质：在最大堆中，父节点的值大于或等于子节点的值",
+    "head": "父节点",
+    "tail": "二叉树",
+    "head_offset": "25",
+    "tail_offset": "6",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "在最小堆中，父节点的值小于或等于子节点的值",
+    "head": "子节点",
+    "tail": "父节点",
+    "head_offset": "16",
+    "tail_offset": "6",
+    "relation": "反义关系"  
+  },
+  {
+    "sentence": "堆通常用于实现优先队列，支持插入、删除最大值或最小值的操作",
+    "head": "堆",
+    "tail": "优先队列",
+    "head_offset": "0",
+    "tail_offset": "7",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "堆的最大优点是可以在对数时间内完成插入和删除操作，广泛应用于任务调度、图的最短路径算法和合并多个有序数组等场景",
+    "head": "删除操作",
+    "tail": "最短路径",
+    "head_offset": "20",
+    "tail_offset": "37",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "堆与其他数据结构的关系较为复杂，常与二叉搜索树、队列等结构一起使用",
+    "head": "二叉搜索树",
+    "tail": "队列",
+    "head_offset": "18",
+    "tail_offset": "24",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "Trie 树（前缀树）是一种用于字符串查找的树形数据结构，其每个节点表示一个字符，路径从根到某个节点的字符串代表一个词或前缀",
+    "head": "树",
+    "tail": "前缀树",
+    "head_offset": "4",
+    "tail_offset": "6",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "综上所述，不同数据结构具有各自独特的优缺点，选择合适的数据结构对于解决具体问题至关重要",
+    "head": "数据结构",
+    "tail": "数据结构",
+    "head_offset": "7",
+    "tail_offset": "27",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "数据结构之间存在着紧密的关系，不同数据结构可以根据应用场景进行组合和优化",
+    "head": "数据结构",
+    "tail": "数据结构",
+    "head_offset": "0",
+    "tail_offset": "17",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "例如，哈希表和链表常常结合使用，形成哈希链表",
+    "head": "链表",
+    "tail": "哈希链表",
+    "head_offset": "7",
+    "tail_offset": "18",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "树和图则通过图遍历、树遍历等算法进行高效查询和操作",
+    "head": "图",
+    "tail": "树",
+    "head_offset": "6",
+    "tail_offset": "10",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "数组是最基础的一种数据结构，它由一系列类型相同的元素按顺序排列组成",
+    "head": "数据结构",
+    "tail": "数组",
+    "head_offset": "9",
+    "tail_offset": "0",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "数组的元素在内存中是连续存储的，这使得其在查找元素时非常高效，因为通过数组的下标可以直接访问到任意位置的元素，访问时间是常数时间 O (1)",
+    "head": "数组",
+    "tail": "数组",
+    "head_offset": "35",
+    "tail_offset": "0",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "因此，如果需要在数组中间插入或删除元素，通常需要移动大量的元素，操作时间复杂度为 O (n)",
+    "head": "时间复杂度",
+    "tail": "数组",
+    "head_offset": "34",
+    "tail_offset": "8",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "在动态数组中（如 C++ 的 std::vector 或 Java 的 ArrayList），为了解决数组大小固定的问题，数组会在需要时进行扩展，这种扩展的过程会涉及到新的内存分配和元素的复制，导致每次扩展操作的时间复杂度为 O (n)，但由于这些扩展操作是按指数增长的，因此在平均意义上，动态数组的操作时间依然接近常数时间",
+    "head": "数组",
+    "tail": "数组",
+    "head_offset": "146",
+    "tail_offset": "61",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "链表是由若干个节点组成的线性数据结构，每个节点包含两个部分：一个是数据部分，另一个是指向下一个节点的指针",
+    "head": "节点",
+    "tail": "数据结构",
+    "head_offset": "21",
+    "tail_offset": "14",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "由于链表中的元素在内存中不是连续存储的，因此它不受数组大小的限制，能够动态扩展",
+    "head": "数组",
+    "tail": "链表",
+    "head_offset": "25",
+    "tail_offset": "2",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "链表的基本操作包括插入、删除、查找等，尤其是在插入和删除操作上，链表的效率优于数组，因为操作时无需移动其他元素",
+    "head": "删除操作",
+    "tail": "数组",
+    "head_offset": "26",
+    "tail_offset": "39",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "链表有不同的变种，最常见的有单向链表、双向链表和循环链表",
+    "head": "链表",
+    "tail": "双向链表",
+    "head_offset": "21",
+    "tail_offset": "19",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "在单向链表中，每个节点只保存一个指向下一个节点的指针，而在双向链表中，每个节点保存指向前后节点的指针，这使得双向链表能够更方便地进行双向遍历",
+    "head": "节点",
+    "tail": "双向链表",
+    "head_offset": "21",
+    "tail_offset": "54",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "循环链表则是链表的尾节点指向头节点，形成一个闭环，常用于需要从任意位置开始循环访问的场景",
+    "head": "节点",
+    "tail": "节点",
+    "head_offset": "10",
+    "tail_offset": "15",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "链表在实现队列、栈等数据结构时非常常见，特别是在需要频繁进行插入和删除操作的场景",
+    "head": "栈",
+    "tail": "队列",
+    "head_offset": "8",
+    "tail_offset": "5",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "链表的缺点是其不支持随机访问，因此在查找元素时需要顺序遍历，时间复杂度为 O (n)",
+    "head": "时间复杂度",
+    "tail": "链表",
+    "head_offset": "30",
+    "tail_offset": "0",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "栈是一种后进先出（LIFO, Last In First Out）的数据结构，其基本操作有压栈（push）和弹栈（pop）",
+    "head": "栈",
+    "tail": "数据结构",
+    "head_offset": "0",
+    "tail_offset": "34",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "栈非常适合用于递归操作的管理",
+    "head": "栈",
+    "tail": "递归操作",
+    "head_offset": "0",
+    "tail_offset": "7",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "因此，栈被广泛应用于函数调用、深度优先搜索（DFS）等算法",
+    "head": "深度优先搜索",
+    "tail": "栈",
+    "head_offset": "15",
+    "tail_offset": "3",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "栈还常用于表达式求值，例如在中缀表达式转后缀表达式的过程中使用栈来存储运算符",
+    "head": "栈",
+    "tail": "栈",
+    "head_offset": "0",
+    "tail_offset": "31",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "队列是一种先进先出（FIFO, First In First Out）的数据结构",
+    "head": "数据结构",
+    "tail": "队列",
+    "head_offset": "36",
+    "tail_offset": "0",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "队列的最大特点是，它确保了第一个进入队列的元素总是最先被处理",
+    "head": "队列",
+    "tail": "队列",
+    "head_offset": "18",
+    "tail_offset": "0",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "队列有几种常见的变种：循环队列、双端队列（deque）和优先队列",
+    "head": "优先队",
+    "tail": "队列",
+    "head_offset": "28",
+    "tail_offset": "18",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "循环队列通过将队列的尾部连接到头部，避免了普通队列在满队列情况下无法继续使用的缺点",
+    "head": "队列",
+    "tail": "队列",
+    "head_offset": "7",
+    "tail_offset": "23",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "而优先队列则不是按照队列的顺序来处理元素，而是根据元素的优先级进行处理，通常用堆来实现",
+    "head": "堆",
+    "tail": "队列",
+    "head_offset": "39",
+    "tail_offset": "10",
+    "relation": "被依赖关系"  
+  },
+  {
+    "sentence": "队列还常用于图的广度优先搜索（BFS）算法",
+    "head": "队列",
+    "tail": "广度优先搜索",
+    "head_offset": "0",
+    "tail_offset": "8",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "哈希表（也称为散列表）是一种通过哈希函数将键（key）映射到数组索引的存储方式",
+    "head": "哈希表",
+    "tail": "散列表",
+    "head_offset": "0",
+    "tail_offset": "7",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "哈希表的基本操作有插入、删除和查找，理论上它们的时间复杂度为 O (1)，但实际性能受哈希函数的影响",
+    "head": "哈希表",
+    "tail": "时间复杂度",
+    "head_offset": "0",
+    "tail_offset": "24",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "在哈希表中，数据项的存储位置由哈希函数决定，哈希表的结构允许以常数时间复杂度进行查找和更新操作",
+    "head": "时间复杂度",
+    "tail": "哈希表",
+    "head_offset": "33",
+    "tail_offset": "1",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "为了解决哈希冲突，常见的方式包括链地址法（也称为链表法）和开放寻址法",
+    "head": "开放寻址",
+    "tail": "寻址",
+    "head_offset": "29",
+    "tail_offset": "31",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "链地址法通过在同一位置存储多个元素的链表来解决冲突，而开放寻址法则通过探测其他位置来解决冲突",
+    "head": "链表",
+    "tail": "链",
+    "head_offset": "18",
+    "tail_offset": "0",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "与树结构相比，哈希表的优势在于查找操作更快，但它不支持元素的有序性，因此无法进行有效的范围查询",
+    "head": "哈希表",
+    "tail": "树",
+    "head_offset": "7",
+    "tail_offset": "1",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "树是一种分层的数据结构，由节点和边组成，节点代表数据，边表示节点间的关系",
+    "head": "数据结构",
+    "tail": "节点",
+    "head_offset": "7",
+    "tail_offset": "13",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "树的根节点是整个树的起始节点，其他节点通过边与父节点或子节点相连接",
+    "head": "根节点",
+    "tail": "节点",
+    "head_offset": "2",
+    "tail_offset": "12",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "常见的树有二叉树、二叉搜索树（BST）、AVL 树、红黑树、B 树等",
+    "head": "二叉搜索树",
+    "tail": "AVL 树",
+    "head_offset": "9",
+    "tail_offset": "20",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "二叉树每个节点最多有两个子节点，而二叉搜索树则是一种特殊的二叉树，满足左子树的值小于根节点，右子树的值大于根节点",
+    "head": "子节点",
+    "tail": "二叉搜索树",
+    "head_offset": "12",
+    "tail_offset": "17",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "AVL 树和红黑树是自平衡的二叉搜索树，能够在插入和删除节点时保持树的平衡，从而确保在最坏情况下也能保持对数时间复杂度",
+    "head": "节点",
+    "tail": "红黑树",
+    "head_offset": "27",
+    "tail_offset": "5",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "树结构的优势在于它能够支持高效的查找、插入和删除操作，尤其在需要维护数据有序性的情况下",
+    "head": "树",
+    "tail": "删除操作",
+    "head_offset": "0",
+    "tail_offset": "22",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "例如，在二叉搜索树中，查找、插入和删除操作的时间复杂度是 O (log n)，而在普通链表中则为 O (n)",
+    "head": "时间复杂度",
+    "tail": "二叉搜索树",
+    "head_offset": "22",
+    "tail_offset": "4",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "图是由一组节点和连接这些节点的边组成的非线性数据结构",
+    "head": "节点",
+    "tail": "节点",
+    "head_offset": "5",
+    "tail_offset": "12",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "图可以用于表示更加复杂的关系，尤其是节点之间的多对多关系",
+    "head": "节点",
+    "tail": "图",
+    "head_offset": "18",
+    "tail_offset": "0",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "图分为有向图和无向图，边可以是有向的，也可以是无向的",
+    "head": "图",
+    "tail": "边",
+    "head_offset": "0",
+    "tail_offset": "11",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "此外，边还可以具有权重，用于表示节点之间的成本、距离或其他关系",
+    "head": "节点",
+    "tail": "边",
+    "head_offset": "16",
+    "tail_offset": "3",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "图的主要特点是没有固定的层次结构，不像树那样要求父子节点之间的单向关系，因此图可以表示更加复杂的结构和关系",
+    "head": "节点",
+    "tail": "树",
+    "head_offset": "26",
+    "tail_offset": "19",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "图的基本操作包括图的遍历、寻找最短路径、最小生成树等",
+    "head": "最短路径",
+    "tail": "最小生成树",
+    "head_offset": "15",
+    "tail_offset": "20",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "图的遍历有两种主要方式：深度优先搜索（DFS）和广度优先搜索（BFS）",
+    "head": "广度优先搜索",
+    "tail": "深度优先搜索",
+    "head_offset": "24",
+    "tail_offset": "12",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "DFS 通过尽可能深地访问每一个节点，直到遍历到所有子节点，然后回溯",
+    "head": "子节点",
+    "tail": "节点",
+    "head_offset": "25",
+    "tail_offset": "15",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "BFS 则是从一个节点开始，访问其所有邻接节点，然后再访问那些邻接节点的邻接节点，直到遍历所有可达节点",
+    "head": "节点",
+    "tail": "节点",
+    "head_offset": "37",
+    "tail_offset": "8",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "DFS 常用于解决连通性问题，而 BFS 则常用于解决最短路径问题",
+    "head": "路径",
+    "tail": "最短路径",
+    "head_offset": "26",
+    "tail_offset": "24",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "在加权图中，最短路径问题是图中一个非常重要的问题，常见的求解算法有 Dijkstra 算法（适用于图的所有边权都为正的情况）和 Bellman-Ford 算法（可以处理负权边）",
+    "head": "最短路径",
+    "tail": "边",
+    "head_offset": "6",
+    "tail_offset": "82",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "另外，最小生成树问题也是图的重要应用，常见的解决算法有 Prim 算法和 Kruskal 算法",
+    "head": "最小生成树",
+    "tail": "Prim 算法",
+    "head_offset": "3",
+    "tail_offset": "27",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "在计算机网络中，网络拓扑可以用图来建模，网络路由协议（如最短路径优先协议）可以通过图的最短路径算法来实现",
+    "head": "最短路径",
+    "tail": "图",
+    "head_offset": "43",
+    "tail_offset": "15",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "堆是一种特殊的完全二叉树数据结构，具有堆性质：最大堆要求父节点的值大于或等于子节点的值，而最小堆要求父节点的值小于或等于子节点的值",
+    "head": "最小堆",
+    "tail": "子节点",
+    "head_offset": "45",
+    "tail_offset": "60",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "堆支持高效的插入、删除最大值（或最小值）操作，常用于实现优先队列",
+    "head": "优先队",
+    "tail": "优先队列",
+    "head_offset": "28",
+    "tail_offset": "28",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "在堆中，插入操作和删除操作的时间复杂度为 O (log n)，因为在最坏情况下，需要进行一次树的调整操作（从根节点开始，比较父节点与子节点的值，进行交换直到满足堆的性质）",
+    "head": "节点",
+    "tail": "父节点",
+    "head_offset": "62",
+    "tail_offset": "61",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "堆常用于实现需要按优先级处理任务的场景，如任务调度、图的最短路径算法（如 Dijkstra 算法）以及合并多个有序序列等",
+    "head": "堆",
+    "tail": "Dijkstra 算法",
+    "head_offset": "0",
+    "tail_offset": "36",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "堆结构与二叉搜索树相比，能够更高效地处理优先级操作，但堆不支持对所有元素的排序，因此它只适用于需要频繁删除最大值或最小值的场景",
+    "head": "堆",
+    "tail": "二叉搜索树",
+    "head_offset": "0",
+    "tail_offset": "4",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "Trie 树（前缀树）",
+    "head": "树",
+    "tail": "前缀树",
+    "head_offset": "4",
+    "tail_offset": "6",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "Trie 树的每个节点表示一个字符，路径从根节点到某个节点的路径字符串代表一个词或前缀",
+    "head": "字符串",
+    "tail": "路径字符串",
+    "head_offset": "31",
+    "tail_offset": "29",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "在 Trie 树中，查找、插入和删除操作的时间复杂度为 O (m)，其中 m 是字符串的长度，与树的节点数无关，因此它对于大量字符串存储和前缀查询特别高效",
+    "head": "字符串",
+    "tail": "删除操作",
+    "head_offset": "60",
+    "tail_offset": "14",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "Trie 树的缺点是空间开销较大，因为每个节点需要存储多个子节点的指针，尤其是在存储大量字符时，可能会占用大量内存",
+    "head": "子节点",
+    "tail": "节点",
+    "head_offset": "28",
+    "tail_offset": "20",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "并查集是一种用于处理集合合并和查询的问题的数据结构，特别适用于处理动态连通性问题",
+    "head": "集合",
+    "tail": "并查集",
+    "head_offset": "10",
+    "tail_offset": "0",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "查找操作用于查询某个元素属于哪个集合，而合并操作用于将两个集合合并成一个集合",
+    "head": "集合",
+    "tail": "查找操作",
+    "head_offset": "16",
+    "tail_offset": "0",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "并查集的核心思想是使用一个树形结构来表示集合，其中每个集合的代表元素是树的根节点，且通过路径压缩和按秩合并技术，使得查找和合并操作的时间复杂度接近常数时间 O (α(n))，其中 α 是反阿克曼函数，增长极其缓慢",
+    "head": "集合",
+    "tail": "时间复杂度",
+    "head_offset": "27",
+    "tail_offset": "66",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "并查集常用于解决图中的连通性问题，例如，判断两个节点是否在同一个连通分量内",
+    "head": "并查集",
+    "tail": "节点",
+    "head_offset": "0",
+    "tail_offset": "24",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "在图的最小生成树算法中，Kruskal 算法就使用了并查集来判断是否形成环",
+    "head": "并查集",
+    "tail": "最小生成树",
+    "head_offset": "25",
+    "tail_offset": "3",
+    "relation": "被依赖关系"  
+  },
+  {
+    "sentence": "哈夫曼树是一种特殊的二叉树，用于数据压缩",
+    "head": "二叉树",
+    "tail": "哈夫曼树",
+    "head_offset": "10",
+    "tail_offset": "0",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "它的构造是根据给定字符的频率来创建一棵最优二叉树，树中每个叶节点表示一个字符，节点的权重与字符的频率成正比",
+    "head": "叶节点",
+    "tail": "节点",
+    "head_offset": "29",
+    "tail_offset": "39",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "哈夫曼树的构建采用贪心算法，首先将每个字符作为一个独立的树，反复合并权重最小的两个树，直到所有的树合并成一棵哈夫曼树",
+    "head": "哈夫曼树",
+    "tail": "树",
+    "head_offset": "0",
+    "tail_offset": "28",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "哈夫曼树广泛用于数据压缩领域，最著名的应用是哈夫曼编码，它通过将频率较高的字符映射为较短的编码，从而减少编码后的数据大小",
+    "head": "哈夫曼树",
+    "tail": "树",
+    "head_offset": "0",
+    "tail_offset": "3",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "数组和链表的关系：",
+    "head": "链表",
+    "tail": "数组",
+    "head_offset": "3",
+    "tail_offset": "0",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "数组的特点是存储连续、支持常数时间随机访问，而链表的特点是存储不连续、插入和删除操作高效",
+    "head": "链表",
+    "tail": "删除操作",
+    "head_offset": "23",
+    "tail_offset": "38",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "数组和链表的关系是：数组适用于需要频繁访问元素的场景，而链表适用于需要频繁插入和删除操作的场景",
+    "head": "数组",
+    "tail": "删除操作",
+    "head_offset": "10",
+    "tail_offset": "40",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "栈是后进先出（LIFO）的数据结构，而队列是先进先出（FIFO）的数据结构",
+    "head": "栈",
+    "tail": "队列",
+    "head_offset": "0",
+    "tail_offset": "19",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "栈和队列的关系是：它们都是线性数据结构，用于处理元素的顺序，只是在访问元素的顺序上不同",
+    "head": "数据结构",
+    "tail": "队列",
+    "head_offset": "15",
+    "tail_offset": "2",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "栈通常用于递归调用、回溯算法，而队列用于任务调度、广度优先搜索等",
+    "head": "队列",
+    "tail": "栈",
+    "head_offset": "16",
+    "tail_offset": "0",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "堆和优先队列的关系：",
+    "head": "堆",
+    "tail": "优先队",
+    "head_offset": "0",
+    "tail_offset": "2",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "堆是一种完全二叉树结构，而优先队列是一种按优先级顺序处理元素的队列",
+    "head": "堆",
+    "tail": "二叉树",
+    "head_offset": "0",
+    "tail_offset": "6",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "堆和优先队列的关系是：优先队列通常是通过堆来实现的，堆保证能够在对数时间内完成最大值或最小值的插入和删除操作",
+    "head": "删除操作",
+    "tail": "堆",
+    "head_offset": "50",
+    "tail_offset": "26",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "哈希表和链表的关系：",
+    "head": "哈希表",
+    "tail": "链表",
+    "head_offset": "0",
+    "tail_offset": "4",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "哈希表使用哈希函数来映射数据到一个固定大小的数组，而链表由节点和指针构成，节点不需要连续存储",
+    "head": "数组",
+    "tail": "哈希表",
+    "head_offset": "22",
+    "tail_offset": "0",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "哈希表和链表的关系是：哈希表在处理冲突时，可以使用链表（链地址法）将哈希表的同一位置的元素存储在链表中",
+    "head": "链",
+    "tail": "哈希表",
+    "head_offset": "28",
+    "tail_offset": "34",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "树是一种具有层次结构的数据结构，图则可以表示任意的节点间关系，不需要层次结构",
+    "head": "层次结构",
+    "tail": "节点",
+    "head_offset": "34",
+    "tail_offset": "25",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "树和图的关系是：图是树的广泛扩展，图的每个节点可能有多个父节点，而树的每个节点只有一个父节点",
+    "head": "父节点",
+    "tail": "节点",
+    "head_offset": "28",
+    "tail_offset": "37",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "二叉搜索树（BST）和二叉树的关系：",
+    "head": "二叉树",
+    "tail": "二叉搜索树",
+    "head_offset": "11",
+    "tail_offset": "0",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "二叉树是每个节点最多有两个子节点的树，而二叉搜索树（BST）是有序的二叉树，满足左子树的值小于根节点，右子树的值大于根节点",
+    "head": "二叉树",
+    "tail": "子节点",
+    "head_offset": "34",
+    "tail_offset": "13",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "二叉搜索树和二叉树的关系是：二叉搜索树是一种特殊的二叉树，其插入和查找操作比普通二叉树更高效，因为它维护了节点的顺序",
+    "head": "二叉树",
+    "tail": "二叉树",
+    "head_offset": "6",
+    "tail_offset": "25",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "AVL 树和红黑树的关系：",
+    "head": "AVL 树",
+    "tail": "红黑树",
+    "head_offset": "0",
+    "tail_offset": "5",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "AVL 树是一种自平衡二叉搜索树，要求任意节点的左右子树高度差不超过 1，而红黑树是一种具有平衡特性的自平衡二叉搜索树",
+    "head": "二叉搜索树",
+    "tail": "AVL 树",
+    "head_offset": "10",
+    "tail_offset": "0",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "AVL 树和红黑树的关系是：它们都用于保持树的平衡性，但 AVL 树比红黑树更严格，因此红黑树通常在插入和删除操作上更高效",
+    "head": "删除操作",
+    "tail": "红黑树",
+    "head_offset": "50",
+    "tail_offset": "5",
+    "relation": "依赖关系"  
+  },
+  {
+    "sentence": "图是一个由节点和边组成的数据结构，节点之间的关系不受限制",
+    "head": "节点",
+    "tail": "节点",
+    "head_offset": "5",
+    "tail_offset": "17",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "树是图的一种特殊类型，其中每个节点只有一个父节点且没有环",
+    "head": "树",
+    "tail": "节点",
+    "head_offset": "0",
+    "tail_offset": "15",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "Trie 树是一种用于存储字符串的树形数据结构，而哈希表则是通过哈希函数将键映射到固定大小的数组中",
+    "head": "字符串",
+    "tail": "哈希表",
+    "head_offset": "12",
+    "tail_offset": "24",
+    "relation": "无关系"  
+  },
+  {
+    "sentence": "Trie 树和哈希表的关系是：哈希表可以用于快速查找单个元素，而 Trie 树则更适合进行前缀匹配和范围查询",
+    "head": "哈希表",
+    "tail": "哈希表",
+    "head_offset": "14",
+    "tail_offset": "6",
+    "relation": "同义关系"  
+  },
+  {
+    "sentence": "并查集是一种用于处理元素分组（连通性）的问题的数据结构，通过路径压缩和按秩合并来优化合并操作",
+    "head": "并查集",
+    "tail": "数据结构",
+    "head_offset": "0",
+    "tail_offset": "23",
+    "relation": "属于关系"  
+  },
+  {
+    "sentence": "图是一种由节点和边组成的非线性数据结构",
+    "head": "节点",
+    "tail": "数据结构",
+    "head_offset": "5",
+    "tail_offset": "15",
+    "relation": "包含关系"  
+  },
+  {
+    "sentence": "并查集和图的关系是：并查集通常用于图中的连通性问题，例如判断图中两个节点是否属于同一个连通分量，或者合并图中的多个连通分量",
+    "head": "节点",
+    "tail": "并查集",
+    "head_offset": "27",
+    "tail_offset": "0",
+    "relation": "包含关系"
+  }
+]

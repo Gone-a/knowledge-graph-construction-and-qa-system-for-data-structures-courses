@@ -1,0 +1,21 @@
+data_dir: "data"
+save_path: "output"
+device: 0 # cuda
+
+do_train: True
+do_eval: True
+do_predict: True
+
+epochs: 15           # the number of training epochs
+batch_size: 6          # 减小单步显存压力 8->6
+
+
+warm_factor: 0.1  # warmup rate
+weight_decay: 0.1
+clip_grad_norm: 5.0
+bert_learning_rate: 1e-5 # lr for bert parameters
+learning_rate: 1e-3  # lr for other parameters
+
+max_seq_len: 512 # Max Word length (Bert: 510 ([CLS], [SEP]  ----->  512), Under 500 is recommended)
+use_bert_last_4_layers: True
+seed: 123
