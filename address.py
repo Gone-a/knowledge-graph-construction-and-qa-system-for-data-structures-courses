@@ -13,24 +13,6 @@ from DeepKE.example.re.standard.my_predict import main as predict_main
 device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-#接受命令参数(已淘汰)
-def arg_process():
-    parser=argparse.ArgumentParser(description='KG')
-    parser.add_argument("--data_path",type=str,default="./data",help="data path")
-    parser.add_argument("--model_path",type=str,default="./model/best_model.pth",help="model path")
-    parser.add_argument("--epoch",type=int,default=100,help="epoch")
-    parser.add_argument("--lr",type=float,default=1e-4,help="learning rate")
-    parser.add_argument("--batch_size",type=int,default=64,help="batch size")
-    parser.add_argument("--train_file",type=str,default="./data/train.json",help="train file")
-    parser.add_argument("--dev_file",type=str,default="./data/dev.json",help="dev file")
-    parser.add_argument("--test_file",type=str,default="./data/test.json",help="test file")
-    parser.add_argument("--output",type=str,default="./model",help="output path")
-    parser.add_argument("--process",type=bool,default=False,help="process data")
-    cfg=parser.parse_args()
-    cfg.device=device
-    cfg.cwd=os.getcwd()
-    return cfg
-
 def train():
     # 切换到DeepKE的标准关系抽取目录
     original_cwd = os.getcwd()
@@ -59,8 +41,6 @@ def predict():
 
 
 def main():
-    #cfg=arg_process()
-    #print(cfg)
     train()
     predict()
 
