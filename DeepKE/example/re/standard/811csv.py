@@ -61,8 +61,7 @@ def split_csv(input_csv, train_csv, test_csv, valid_csv):
         print(f"划分数据集时出现错误: {e}")
 
 def main():
-    input_json = "/root/KG/DeepKE/example/re/standard/rel_predict.json"
-    output_csv = "/root/KG/DeepKE/example/re/standard/relation_predict.csv"
+    input_csv = "/root/KG/DeepKE/example/re/standard/optimized_relations.csv"
     train_csv = "/root/KG/DeepKE/example/re/standard/data/origin/train.csv"
     test_csv = "/root/KG/DeepKE/example/re/standard/data/origin/test.csv"
     valid_csv = "/root/KG/DeepKE/example/re/standard/data/origin/valid.csv"
@@ -70,7 +69,7 @@ def main():
     # 先将json转csv（如果需要的话，原代码main中未调用，若需要可添加）
     # json_to_csv(input_json, output_csv)
     
-    split_csv(output_csv, train_csv, test_csv, valid_csv)
+    split_csv(input_csv, train_csv, test_csv, valid_csv)
 
 if __name__ == "__main__":
     main()

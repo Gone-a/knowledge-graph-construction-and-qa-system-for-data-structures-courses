@@ -1,0 +1,11 @@
+#CON=概念,ARI=算法
+head_type,tail_type,relation,index
+CON,ARI,rely,0
+CON,ARI,b-rely,1
+CON,CON,belg,2
+CON,CON,b-belg,3
+CON,CON,syno,4
+ARI,ARI,relative,5
+CON,ARI,attr,6
+ARI,CON,b-attr,7
+CON,CON,none,8

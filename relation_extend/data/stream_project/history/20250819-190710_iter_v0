@@ -1,0 +1,12 @@
+{
+    "data_dir": "data/stream_project",
+    "predictions_csv": "data/stream_project/predictions.csv",
+    "base_kg_path": "data/stream_project/base.json",
+    "refined_kg_path": "data/stream_project/base_refined.json",
+    "version": 0,
+    "kg_paths": [
+        "data/stream_project/iteration_version_0.json"
+    ],
+    "gpu": 0,
+    "enable_ner": true
+}

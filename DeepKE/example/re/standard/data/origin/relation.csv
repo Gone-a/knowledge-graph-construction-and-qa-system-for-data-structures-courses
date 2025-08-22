@@ -4,7 +4,7 @@ CON,ARI,b-rely,1
 CON,CON,belg,2
 CON,CON,b-belg,3
 CON,CON,syno,4
-ARI,ARI,anto,5
+ARI,ARI,relative,5
 CON,ARI,attr,6
 ARI,CON,b-attr,7
 CON,CON,none,8

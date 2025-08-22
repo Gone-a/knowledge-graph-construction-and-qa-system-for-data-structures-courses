@@ -71,6 +71,12 @@ def build_vocab(config):
     train_ent_num = fill_vocab(vocab, train_data)
     config.label_num = len(vocab.label2id)
     print(f'Building Done! Label num: {config.label_num}\n')
+
+    #存储词汇表
+    vocab_path = os.path.join(utils.get_original_cwd(), config.save_path, 'vocab.pkl')
+    with open(vocab_path, 'wb') as f:
+        pickle.dump(vocab, f)
+    print(f'Vocabulary saved to {vocab_path}')
     return config
 
 def process_sentence(sub_sent, tokenizer, max_seq_len):
@@ -130,6 +136,7 @@ def main(cfg):
     
     # 修复问题：先构建词汇表
     config = build_vocab(config)
+    
     
     print('*********加载模型和分词器*********')
     model = Model(config).cuda()

@@ -1,3 +1,4 @@
+#处理多条输入的情况
 import os
 import sys
 import torch
@@ -9,6 +10,7 @@ from hydra import utils
 from deepke.relation_extraction.standard.tools import Serializer
 from deepke.relation_extraction.standard.tools import _serialize_sentence, _convert_tokens_into_index, _add_pos_seq, _handle_relation_data , _lm_serialize
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from deepke.relation_extraction.standard.utils import load_pkl, load_csv
 import deepke.relation_extraction.standard.models as models
@@ -58,6 +60,9 @@ def _load_csv_data(csv_path):
                 sys.exit(1)
         
         for _, row in df.iterrows():
+            #过滤头尾为空的和头尾相同的
+            if pd.isna(row['head']) or pd.isna(row['tail']) or row['head'] == row['tail']:
+                continue
             instance = {
                 'sentence': str(row['sentence']).strip(),
                 'head': str(row['head']).strip(),
@@ -79,10 +84,10 @@ def main(cfg):
     cwd = utils.get_original_cwd()
     cfg.cwd = cwd
     cfg.pos_size = 2 * cfg.pos_limit + 2
-    print(cfg.pretty())
+    #print(cfg.pretty())
 
     # 批量加载CSV文件
-    batch_predict_file="data/my_origin/test.csv"
+    batch_predict_file= cfg.predict_data_path
     
     csv_path = os.path.join(cfg.cwd, batch_predict_file)
     data = _load_csv_data(csv_path)
@@ -140,9 +145,8 @@ def main(cfg):
     # 存储所有预测结果
     all_results = []
     
-    for i, instance in enumerate(data):
-        logger.info(f"\n处理实例 {i+1}/{len(data)}: {instance['sentence']}")
-        
+    # 使用进度条显示处理进度
+    for i, instance in enumerate(tqdm(data, desc="处理预测数据", unit="条")):
         # 为当前实例创建临时数据
         instance_data = [instance]
         
@@ -178,7 +182,6 @@ def main(cfg):
 
             prob_rel, prob, y_pred = process_single_piece(model, x, device, rels, cfg.model_name)
             
-            logger.info(f"结果: \"{instance['head']}\" 和 \"{instance['tail']}\" 关系为: \"{prob_rel}\", 置信度: {prob:.4f}")
             all_results.append({
                 'sentence': instance['sentence'],
                 'head': instance['head'],
@@ -206,7 +209,6 @@ def main(cfg):
                     max_prob = prob
                     best_relation = relation
             
-            logger.info(f"结果: \"{instance['head']}\" 和 \"{instance['tail']}\" 关系为: \"{best_relation}\", 置信度: {max_prob:.4f}")
             all_results.append({
                 'sentence': instance['sentence'],
                 'head': instance['head'],
@@ -216,16 +218,48 @@ def main(cfg):
             })
     
     # 保存结果到CSV
-    results_dir = os.path.join(cfg.cwd, cfg.out_path, 'predictions')
-    os.makedirs(results_dir, exist_ok=True)
-    results_file = os.path.join(results_dir, 'predictions.csv')
+    # 设置置信度阈值
+    confidence_threshold = 0.8
     
+    # 打印一些统计信息
+    if all_results:
+        confidences = [result['confidence'] for result in all_results]
+        logger.info(f"置信度统计: 最大值={max(confidences):.3f}, 最小值={min(confidences):.3f}, 平均值={sum(confidences)/len(confidences):.3f}")
+        logger.info(f"总共预测结果: {len(all_results)} 条")
+    else:
+        logger.warning("没有生成任何预测结果！")
+
+    # 过滤低置信度结果
+    filtered_results = [
+        result for result in all_results 
+        if result['confidence'] >= confidence_threshold
+    ]
+
+    # 保存过滤后的结果到CSV
+    results_file = os.path.join(cfg.cwd, cfg.predict_out_path)
+    results_file_2 = os.path.abspath(os.path.join(cfg.cwd,"../../../..","neo4j/data/predictions.csv"))
+    logger.info(f"完整输出路径: {results_file}")
+    logger.info(f"完整输出路径_2: {results_file_2}")
+    os.makedirs(os.path.dirname(results_file), exist_ok=True)
+    os.makedirs(os.path.dirname(results_file_2), exist_ok=True)
+
     try:
-        results_df = pd.DataFrame(all_results)
-        results_df.to_csv(results_file, index=False, encoding='utf-8-sig')
-        logger.info(f"预测结果已保存到: {results_file}")
+        if filtered_results:
+            results_df = pd.DataFrame(filtered_results)  # 使用过滤后的结果
+            results_df.to_csv(results_file, index=False, encoding='utf-8-sig')
+            results_df.to_csv(results_file_2, index=False, encoding='utf-8-sig')
+            logger.info(f"预测结果已保存到: {results_file}")
+            logger.info(f"预测结果已保存到: {results_file_2}")
+            logger.info(f"保存了 {len(filtered_results)} 条结果，过滤掉 {len(all_results) - len(filtered_results)} 条低置信度结果（置信度 < {confidence_threshold})")
+        else:
+            logger.warning(f"没有置信度 >= {confidence_threshold} 的结果，保存空文件")
+            # 保存空的DataFrame以创建带表头的空文件
+            empty_df = pd.DataFrame(columns=['sentence', 'head', 'tail', 'relation', 'confidence'])
+            empty_df.to_csv(results_file, index=False, encoding='utf-8-sig')
     except Exception as e:
         logger.error(f"保存结果失败: {e}")
+        import traceback
+        logger.error(f"详细错误信息: {traceback.format_exc()}")
 
 
 if __name__ == '__main__':

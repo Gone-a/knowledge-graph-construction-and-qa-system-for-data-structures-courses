@@ -1,4 +1,8 @@
+
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+sys.path.append(os.path.dirname(__file__))
 import hydra
 import torch
 import logging
@@ -8,9 +12,10 @@ from hydra import utils
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
+
 # self
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+
+from calc_class_weights import calc_class_weights
 import deepke.relation_extraction.standard.models as models
 from deepke.relation_extraction.standard.tools import preprocess , CustomDataset, collate_fn ,train, validate
 from deepke.relation_extraction.standard.utils import manual_seed, load_pkl
@@ -101,8 +106,9 @@ def main(cfg):
     optimizer = optim.Adam(model.parameters(), lr=cfg.learning_rate, weight_decay=cfg.weight_decay)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=cfg.lr_factor, patience=cfg.lr_patience)
     # 类别权重顺序需与类别索引一致
-    #                       顺序: ['rely', 'b-rely', 'belg', 'b-belg', 'syno', 'anto', 'attr', 'b-attr', 'none']
-    class_weights = torch.tensor([3.0752, 490.5000, 3.9240, 3.9398, 45.6279, 140.1429, 490.5000,122.6250,8.0082], dtype=torch.float).to(device)
+    #                       顺序: ['rely', 'b-rely', 'belg', 'b-belg', 'syno', 'relative', 'attr', 'b-attr', 'none']
+    class_weights = calc_class_weights()
+    class_weights = class_weights.to(device)
     criterion = nn.CrossEntropyLoss(weight=class_weights)
 
     best_f1, best_epoch = -1, 0
@@ -121,11 +127,26 @@ def main(cfg):
         train_loss = train(epoch, model, train_dataloader, optimizer, criterion, device, writer, cfg)
         valid_f1, valid_loss = validate(epoch, model, valid_dataloader, criterion, device, cfg)
         scheduler.step(valid_loss)
-        if MULTI_GPU:
-            model_path = model.module.save(epoch, cfg)
-        else:
-            model_path = model.save(epoch, cfg)
+        #if MULTI_GPU:
+        #    current_model_path = model.module.save(epoch, cfg)
+        #else:
+        #    current_model_path = model.save(epoch, cfg)
         # logger.info(model_path)
+        if valid_f1 > best_f1:
+            best_f1 = valid_f1
+            best_epoch = epoch
+            # 定义最佳模型保存路径
+            best_model_path = os.path.join(cfg.cwd, "checkpoints", f"best_model.pth")
+            # 关键：创建保存文件夹（如果不存在）
+            save_dir = os.path.dirname(best_model_path)  # 获取文件夹路径
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir, exist_ok=True)  # 递归创建文件
+            # 保存模型状态字典
+            if MULTI_GPU:
+                torch.save(model.module.state_dict(), best_model_path)
+            else:
+                torch.save(model.state_dict(), best_model_path)
+            logger.info(f"Best model updated at epoch {epoch}, saved to {best_model_path}")
 
         train_losses.append(train_loss)
         valid_losses.append(valid_loss)
@@ -145,7 +166,7 @@ def main(cfg):
             es_f1 = valid_f1
             es_epoch = epoch
             es_patience = 0
-            es_path = model_path
+            es_path = best_model_path
         else:
             es_patience += 1
             if es_patience >= cfg.early_stopping_patience:

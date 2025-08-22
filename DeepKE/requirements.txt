@@ -1,4 +1,5 @@
-hydra-core==1.0.6
+#先把pip版本降到24.1以下
+pip==24.0
 tensorboard==2.4.1
 matplotlib==3.4.1
 transformers==4.26.0

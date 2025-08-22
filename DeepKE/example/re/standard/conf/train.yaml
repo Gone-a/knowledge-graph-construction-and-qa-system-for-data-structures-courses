@@ -5,11 +5,11 @@ use_gpu: True
 gpu_id: 0
 
 epoch: 100
-batch_size: 16
+batch_size: 32
 learning_rate: 3e-4
 lr_factor: 0.7 # 学习率的衰减率
 lr_patience: 3 # 学习率衰减的等待epoch
-weight_decay: 5e-3 # L2正则
+weight_decay: 1e-3 # L2正则
 
 early_stopping_patience: 6
 
