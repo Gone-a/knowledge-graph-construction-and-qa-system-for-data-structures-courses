@@ -1,10 +1,68 @@
 #先把pip版本降到24.1以下
 pip==24.0
+
+# Web框架
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# 数据库和图数据库
+neo4j==5.15.0
+py2neo==2021.2.4
+
+# 机器学习和NLP
+torch==2.1.0
+torchvision==0.16.0
+transformers==4.36.0
+scikit-learn==1.3.2
+numpy==1.24.4
+pandas==2.1.4
+
+# HTTP请求
+requests==2.31.0
+httpx==0.25.2
+
+# 配置管理
+python-dotenv==1.0.0
+PyYAML==6.0.1
+
+# 日志和监控
+loguru==0.7.2
+
+# 缓存
+redis==5.0.1
+
+# 数据验证
+pydantic==2.5.0
+
+# 时间处理
+python-dateutil==2.8.2
+
+# 文本处理
+jieba==0.42.1
+
+# 开发和测试工具
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0
+
+# 性能监控
+psutil==5.9.6
+memory-profiler==0.61.0
+
+# 异步支持
+aiohttp==3.9.1
+aiofiles==23.2.1
+
+# 工具库
+click==8.1.7
+tqdm==4.66.1
+colorama==0.4.6
+
+# 原有依赖保留
 tensorboard==2.4.1
 matplotlib==3.4.1
-transformers==4.26.0
-jieba==0.42.1
-scikit-learn==0.24.1
 seqeval==1.2.2
 opt-einsum==3.3.0
 wandb==0.12.7
@@ -13,17 +71,12 @@ huggingface_hub==0.11.0
 tensorboardX==2.5.1
 nltk==3.8
 protobuf==3.20.1
-numpy==1.21.0
 ipdb==0.13.11
 pytorch-crf==0.7.2
-tqdm==4.66.1
 openai==0.28.0
 Jinja2==3.1.2
 datasets==2.13.2
 pyhocon==0.3.60
-torch>=1.5,<=1.11
-pandas>=1.3.0
-py2neo>=2021.2.3
 hydra-core>=1.1.0
 zhconv>=1.4.0
 paddlenlp>=2.4.0

@@ -1,55 +1,12 @@
 from py2neo import Graph
-from transformers import pipeline
-import os
-from typing import List, Dict, Any, Optional
-import logging
-import re
+from typing import List, Dict, Any
 
 class DSAGraphQAFixed:
-    """DSA知识图谱问答系统 - 修复版本
-    
-    提供三个主要接口：
-    1. find_entity_relations: 查找实体的所有相关关系
-    2. find_entities_by_relation: 根据关系查找相关实体
-    3. find_relation_by_entities: 查找两个实体之间的关系（支持双向查找）
-    
-    
-    """
-    
-    # 常量定义
-    MAX_ENTITY_LENGTH = 100
-    MAX_ENTITIES_PER_QUERY = 50
-    DEFAULT_CONFIDENCE_THRESHOLD = 0.8
-    QUERY_RESULT_LIMIT = 1000
-    FLOAT_PRECISION = 1e-10
+    """DSA知识图谱问答系统"""
     
     def __init__(self, neo4j_uri: str, username: str, password: str):
-        """初始化图数据库连接和NLP模型
-        
-        Args:
-            neo4j_uri: Neo4j数据库URI
-            username: 用户名
-            password: 密码
-            
-        Raises:
-            ConnectionError: 数据库连接失败
-            ValueError: 参数验证失败
-        """
-        # 参数验证
-        if not neo4j_uri or not isinstance(neo4j_uri, str):
-            raise ValueError("neo4j_uri不能为空且必须是字符串")
-        if not username or not isinstance(username, str):
-            raise ValueError("username不能为空且必须是字符串")
-        if not password or not isinstance(password, str):
-            raise ValueError("password不能为空且必须是字符串")
-        
-        try:
-            # 连接Neo4j数据库
-            self.graph = Graph(neo4j_uri, auth=(username, password))
-            # 测试连接
-            self.graph.run("RETURN 1").data()
-        except Exception as e:
-            raise ConnectionError(f"数据库连接失败: {e}")
+        """初始化图数据库连接"""
+        self.graph = Graph(neo4j_uri, auth=(username, password))
         
         # 数据库中实际的关系类型（中文）
         self.relation_types = ["依赖", "包含", "属于", "同义", "相对", "拥有", "属性"]

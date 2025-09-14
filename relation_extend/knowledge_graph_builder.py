@@ -1,70 +1,25 @@
 import os
 import json
 import pandas as pd
-from prepare import cprint as ct
-import time
-from ner_extractor import create_ner_extractor
-from relation_predictor import create_relation_predictor
 
 class KnowledgeGraphBuilder:
     def __init__(self, args) -> None:
-        """
-        简化版知识图谱构建器，直接使用predictions.csv文件
-        集成NER模型来提取更多实体，优化知识图谱拓展性能
-        """
+        """知识图谱构建器"""
         self.data_dir = os.path.join("data", args.project)
-        # 使用动态生成的CSV文件路径，而不是硬编码路径
         self.predictions_csv = getattr(args, 'csv_path', os.path.join(self.data_dir, "predictions.csv"))
         self.base_kg_path = os.path.join(self.data_dir, "base.json")
         self.refined_kg_path = os.path.join(self.data_dir, "base_refined.json")
         
         self.version = 0
         self.kg_paths = []
-        self.gpu = args.gpu
-        
-        # 初始化NER提取器（仅在启用时）
-        self.enable_ner = getattr(args, 'enable_ner', False)
-        if self.enable_ner:
-            self.ner_extractor = create_ner_extractor(
-                model_path=getattr(args, 'ner_model_path', None),
-                config_path=getattr(args, 'ner_config_path', None)
-            )
-            # 初始化关系预测器
-            self.relation_predictor = create_relation_predictor(
-                confidence_threshold=getattr(args, 'confidence_threshold', 0.7)
-            )
-        else:
-            self.ner_extractor = None
-            self.relation_predictor = None
         
         os.makedirs(self.data_dir, exist_ok=True)
     
     def load_predictions_from_csv(self):
-        """
-        从predictions.csv文件加载预测结果并转换为知识图谱格式
-        使用NER模型增强实体提取
-        """
-        print(ct.green("Loading predictions from CSV..."))
-        
-        # 根据是否启用NER功能决定是否增强预测结果
-        if self.enable_ner and self.ner_extractor and self.relation_predictor:
-            print(ct.blue("使用NER+RE模型进行全实体关系预测..."))
-            enhanced_csv_path = self.relation_predictor.enhance_predictions_with_all_entities(
-                self.predictions_csv,
-                self.ner_extractor,
-                os.path.join(self.data_dir, "predictions_enhanced.csv")
-            )
-            df = pd.read_csv(enhanced_csv_path)
-            print(ct.blue(f"使用全实体关系预测结果，共{len(df)}条记录"))
-        else:
-            # 直接读取原始CSV文件
-            df = pd.read_csv(self.predictions_csv)
-            print(ct.blue(f"使用原始预测结果，共{len(df)}条记录"))
-        
-        # 过滤掉关系为'none'的记录
+        """从predictions.csv文件加载预测结果并转换为知识图谱格式"""
+        df = pd.read_csv(self.predictions_csv)
         df = df[df['relation'] != 'none']
         
-        # 按句子分组，构建知识图谱格式
         kg_data = []
         sentence_groups = df.groupby('sentence')
         
@@ -76,50 +31,32 @@ class KnowledgeGraphBuilder:
                     "em1Text": row['head'],
                     "em2Text": row['tail'], 
                     "label": row['relation'],
-                    "confidence": float(row.get('confidence', 0.0)),  # 保留置信度信息
-                    "head_type": row.get('head_type', 'UNK'),
-                    "tail_type": row.get('tail_type', 'UNK')
+                    "confidence": float(row.get('confidence', 0.0))
                 }
                 relations.append(relation)
             
-            if relations:  # 只保存有关系的句子
-                # 按置信度排序关系
-                relations.sort(key=lambda x: x.get('confidence', 0.0), reverse=True)
-                
+            if relations:
                 item = {
                     "id": item_id,
                     "sentText": sentence,
-                    "relationMentions": relations,
-                    "avg_confidence": sum(r.get('confidence', 0.0) for r in relations) / len(relations)
+                    "relationMentions": relations
                 }
                 kg_data.append(item)
                 item_id += 1
         
-        print(ct.yellow(f"Loaded {len(kg_data)} sentences with {len(df)} relations"))
         return kg_data
     
     def get_base_kg_from_csv(self):
-        """
-        从CSV文件构建基础知识图谱
-        """
-        print(ct.green("Building base knowledge graph from CSV..."))
-        
-        # 加载预测结果
+        """从CSV文件构建基础知识图谱"""
         kg_data = self.load_predictions_from_csv()
         
-        # 保存基础知识图谱
         with open(self.base_kg_path, 'w', encoding='utf-8') as f:
             for item in kg_data:
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
         
-        print(ct.green(f"Base knowledge graph saved to: {self.base_kg_path}"))
-        
-        # 直接复制到refined版本（跳过人工筛选步骤）
         with open(self.refined_kg_path, 'w', encoding='utf-8') as f:
             for item in kg_data:
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
-        
-        print(ct.green(f"Refined knowledge graph saved to: {self.refined_kg_path}"))
     
     def run_iteration(self):
         """
