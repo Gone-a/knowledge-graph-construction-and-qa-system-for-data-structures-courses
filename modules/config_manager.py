@@ -46,10 +46,10 @@ class ConfigManager:
             
             # 服务器配置
             'server': {
-                'host': os.getenv('SERVER_HOST', '0.0.0.0'),
-                'port': int(os.getenv('SERVER_PORT', '8000')),
+                'host': os.getenv('SERVER_HOST', 'localhost'),
+                'port': int(os.getenv('SERVER_PORT', '5000')),
                 'debug': os.getenv('DEBUG', 'False').lower() == 'true',
-                'cors_origins': os.getenv('CORS_ORIGINS', 'http://localhost:5000').split(','),
+                'cors_origins': os.getenv('CORS_ORIGINS', 'http://localhost:8080').split(','),
             },
             
             # 大模型配置

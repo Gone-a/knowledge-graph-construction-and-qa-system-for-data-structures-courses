@@ -201,6 +201,7 @@ def create_flask_app(api_handler=None) -> Flask:
         
         # 处理查询
         result = api_handler.process_query(message)
+        # result = {"message": "测试回复"}
         
         # 返回前端期望的格式
         return jsonify({"message": result["message"]})
@@ -233,7 +234,7 @@ def create_flask_app(api_handler=None) -> Flask:
     
     @app.route("/reply", methods=["GET"])
     def reply():
-        return "测试接口"
+        return "测试"
     return app
 
 

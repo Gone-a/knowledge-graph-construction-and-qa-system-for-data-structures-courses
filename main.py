@@ -73,8 +73,8 @@ class KnowledgeGraphApp:
     def run(self):
         """运行应用程序"""
         server_config = self.config.get_server_config()
-        host = server_config.get('host', '0.0.0.0')
-        port = server_config.get('port', 8000)
+        host = server_config.get('host', 'localhost')
+        port = server_config.get('port', 5000)
         debug = server_config.get('debug', False)
         
         self.app.run(host=host, port=port, debug=debug)
