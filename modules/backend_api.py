@@ -10,17 +10,8 @@ import json
 import logging
 from typing import Dict, Any, Optional
 
-try:
-    from .intent_recognition import IntentRecognizer
-    from .knowledge_graph import KnowledgeGraphQuery
-    from .config_manager import get_config_manager
-    from .deepseek_llm import DeepSeekLLM
-except ImportError:
-    # 如果模块不存在，使用简单的模拟实现
-    IntentRecognizer = None
-    KnowledgeGraphQuery = None
-    get_config_manager = None
-    DeepSeekLLM = None
+
+
 
 class APIHandler:
     """简化的API处理器
@@ -79,9 +70,8 @@ class APIHandler:
             nlu_result = self.intent_recognizer.understand(user_input)
         
         if self.kg_query and nlu_result.get('intent') != 'unknown':
-            knowledge_data = self.kg_query.query(
+            knowledge_data = self.kg_query.query_graph(
                 user_input, 
-                intent=nlu_result.get('intent'),
                 entities=nlu_result.get('entities', [])
             )
         
@@ -89,8 +79,7 @@ class APIHandler:
         response_text = self._generate_response(nlu_result, knowledge_data, user_input)
         return {"success": True, "message": response_text}
     
-    def _generate_response(self, nlu_result: Dict[str, Any], 
-                          knowledge_data: Any, user_input: str) -> str:
+    def _generate_response(self, nlu_result: Dict[str, Any], knowledge_data: Dict[str, Any], user_input: str) -> str:
         """
         生成回复
         
@@ -104,37 +93,24 @@ class APIHandler:
         """
         # 使用大模型生成回复
         if self.llm_client:
-            response = self.llm_client.generate_response(user_input)
-            if response and response.strip():
-                return response.strip()
-        
-        # 使用模板回复
-        return self._generate_template_response(nlu_result, knowledge_data, user_input)
-    
-    def _generate_template_response(self, nlu_result: Dict[str, Any], 
-                                   knowledge_data: Any, user_input: str) -> str:
-        """
-        生成简单的模板回复
-        
-        Args:
-            nlu_result: 意图识别结果
-            knowledge_data: 知识图谱数据
-            user_input: 用户输入
+            # 构建包含上下文信息的提示
+            context = f"用户问题：{user_input}\n"
+            if nlu_result:
+                context += f"意图：{nlu_result.get('intent', '未知')}\n"
+                if nlu_result.get('entities'):
+                    context += f"实体：{', '.join(nlu_result.get('entities', []))}\n"
+            if knowledge_data and knowledge_data.get('answer'):
+                context += f"知识图谱信息：{knowledge_data.get('answer')}\n"
             
-        Returns:
-            str: 模板回复
-        """
-        intent = nlu_result.get('intent', 'unknown')
+            response = self.llm_client.generate_response(context)
+            if response and response.content and response.content.strip():
+                return response.content.strip()
         
-        # 简化的回复逻辑
-        if intent == 'greeting':
-            return "您好！有什么可以帮助您的吗？"
-        elif intent == 'help':
-            return "我可以帮您查询信息和回答问题。"
-        elif knowledge_data:
-            return "我找到了相关信息。"
-        else:
-            return f"收到您的消息：{user_input}"
+        # 如果没有LLM或生成失败，返回默认回复
+        if knowledge_data and knowledge_data.get('answer'):
+            return knowledge_data.get('answer')
+        return "抱歉，我无法理解您的问题。"
+    
     
     def get_status(self) -> Dict[str, Any]:
         """
@@ -244,13 +220,3 @@ def create_app():
     return create_flask_app()
 
 
-if __name__ == "__main__":
-    # 配置日志
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    
-    # 创建并运行应用
-    app = create_app()
-    app.run(host='0.0.0.0', port=5000, debug=True)

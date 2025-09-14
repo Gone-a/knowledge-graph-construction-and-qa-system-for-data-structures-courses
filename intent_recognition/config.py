@@ -9,8 +9,6 @@ load_dotenv()
 DEEPSEEK_API_KEY ="sk-fbf0cbed7c3e4a778a6aca7379791de4"
 #DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-if not DEEPSEEK_API_KEY:
-    raise ValueError("未找到DeepSeek API密钥，请检查您的 .env 文件是否已正确设置。")
 
 # --- 已更改: 配置DeepSeek的模型和API地址 ---
 DEEPSEEK_MODEL_NAME = "deepseek-chat-light" # DeepSeek的对话模型

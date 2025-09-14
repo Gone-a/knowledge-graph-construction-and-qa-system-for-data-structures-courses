@@ -25,7 +25,7 @@ class ConfigManager:
             # API配置
             'api': {
                 'deepseek_api_key': os.getenv('DEEPSEEK_API_KEY', 'sk-fbf0cbed7c3e4a778a6aca7379791de4'),
-                'deepseek_model_name': os.getenv('DEEPSEEK_MODEL_NAME', 'deepseek-chat-light'),
+                'deepseek_model_name': os.getenv('DEEPSEEK_MODEL_NAME', 'deepseek-chat'),
                 'deepseek_base_url': os.getenv('DEEPSEEK_BASE_URL', 'https://api.deepseek.com/v1'),
             },
             

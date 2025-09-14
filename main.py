@@ -65,6 +65,10 @@ class KnowledgeGraphApp:
         # 初始化API处理器
         self.api_handler = APIHandler(self.intent_recognizer, self.kg_query, llm_client)
         
+        # 测试API
+        #result=self.api_handler.process_query("你好")
+        #print(result)
+
         # 创建Flask应用
         self.app = create_flask_app(self.api_handler)
     
