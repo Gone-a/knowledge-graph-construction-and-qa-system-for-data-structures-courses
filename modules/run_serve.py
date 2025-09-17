@@ -17,13 +17,34 @@ from pathlib import Path
 import os
 import contextlib
 import subprocess
+import threading
+import time
 
 class RunServe():
     def __init__(self):
-        pass
+        self.vue_process = None
+        
+    def start_vue_async(self):
+        """异步启动Vue服务"""
+        def run_vue():
+            original_dir = os.getcwd()
+            try:
+                vue_dir = os.path.join(original_dir, 'Vue')
+                os.chdir(vue_dir)
+                self.vue_process = subprocess.Popen(["npm", "run", "serve"])
+                self.vue_process.wait()
+            except Exception as e:
+                print(f"Vue服务启动失败: {e}")
+            finally:
+                os.chdir(original_dir)
+        
+        vue_thread = threading.Thread(target=run_vue, daemon=True)
+        vue_thread.start()
+        # 给Vue一些时间启动
+        time.sleep(2)
     
     @contextlib.contextmanager
-    def run(self,str):
+    def run(self, str):
         """临时切换目录的上下文管理器"""
         original_dir = os.getcwd()
         try:
@@ -34,9 +55,8 @@ class RunServe():
                 yield
             
             elif str == 'Vue':  
-                new_dir = os.path.join('Vue')
-                os.chdir(new_dir)
-                subprocess.run(["npm", "run", "serve"])
+                # 异步启动Vue服务，不阻塞主程序
+                self.start_vue_async()
                 yield
             
             else:

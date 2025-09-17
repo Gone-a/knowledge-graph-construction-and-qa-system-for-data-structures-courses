@@ -175,8 +175,8 @@ def create_flask_app(api_handler=None) -> Flask:
             return jsonify({"message": "消息不能为空"})
         
         # 处理查询
-        # result = api_handler.process_query(message)
-        result = {"message": "测回复"}
+        result = api_handler.process_query(message)
+        #result = {"message": "测回复"}
 
         #图的字典
         graph_dict={}

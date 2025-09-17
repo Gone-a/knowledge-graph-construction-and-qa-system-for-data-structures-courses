@@ -15,7 +15,7 @@ class LLMResponse:
     finish_reason: str
     response_time: float
 
-class DoubaoLLM:
+
     """豆包（火山方舟）LLM客户端"""
 class DoubaoLLM:
     def __init__(self, user_api_key: Optional[str] = None, user_model_id: Optional[str] = None):
@@ -30,6 +30,13 @@ class DoubaoLLM:
         # 1. 优先级：用户传入 > 系统配置
         self.ark_api_key = user_api_key.strip() if (user_api_key and user_api_key.strip()) else self.config.get('ark_api_key')
         self.doubao_model_id = user_model_id.strip() if (user_model_id and user_model_id.strip()) else self.config.get('doubao_model_id')
+        
+        # 检查API Key是否为空
+        if not self.ark_api_key:
+            raise ValueError("ARK_API_KEY 未配置，请在环境变量中设置 ARK_API_KEY")
+        
+        if not self.doubao_model_id:
+            raise ValueError("DOUBAO_MODEL_ID 未配置，请在环境变量中设置 DOUBAO_MODEL_ID")
         
         # 2. 初始化火山方舟客户端
         self.client = Ark(api_key=self.ark_api_key)
@@ -112,4 +119,4 @@ class DoubaoLLM:
         if max_tokens:
             self.max_tokens = max_tokens
         if temperature:
-            self.temperature = temperature
+            self.default_temperature = temperature

@@ -23,10 +23,9 @@ class ConfigManager:
         """加载所有配置"""
         config = {
             # API配置
-            'api': {
-                'api_key': os.getenv('DEEPSEEK_API_KEY', 'sk-fbf0cbed7c3e4a778a6aca7379791de4'),
-                'model_name': os.getenv('DEEPSEEK_MODEL_NAME', 'deepseek-chat'),
-                'base_url': os.getenv('DEEPSEEK_BASE_URL', 'https://api.deepseek.com/v1'),
+             'api': {
+                'ark_api_key': os.getenv('ARK_API_KEY', '69687985-d651-4f6e-ba19-39678e221d60'),  # now项目的默认密钥
+                'doubao_model_id': os.getenv('DOUBAO_MODEL_ID', 'doubao-seed-1-6-flash-250828'),  # now项目的豆包Model ID
             },
             
             # 模型配置

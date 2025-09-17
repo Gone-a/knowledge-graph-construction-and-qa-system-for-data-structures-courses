@@ -18,7 +18,7 @@ from modules.intent_recognition import IntentRecognizer
 from modules.knowledge_graph_query import KnowledgeGraphQuery
 from modules.run_serve import RunServe
 from modules.backend_api import APIHandler, create_flask_app
-from modules.deepseek_llm import DeepSeekLLM
+from modules.doubao_llm import DoubaoLLM
 
 # 导入知识库
 try:
@@ -60,17 +60,21 @@ class KnowledgeGraphApp:
         )
         
         # 初始化LLM客户端
-        api_config = self.config.get_api_config()
-        llm_config = self.config.get_llm_config()
-        llm_client = DeepSeekLLM(
-            api_key=api_config['api_key'],
-            model_name=api_config['model_name'],
-            base_url=api_config['base_url']
-        )
-        llm_client.set_parameters(
-            max_tokens=llm_config['max_tokens'],
-            temperature=llm_config['temperature']
-        )
+        try:
+            api_config = self.config.get_api_config()
+            llm_config = self.config.get_llm_config()
+            llm_client = DoubaoLLM(
+                user_api_key=api_config.get('ark_api_key'),
+                user_model_id=api_config.get('doubao_model_id')
+            )
+            llm_client.set_parameters(
+                max_tokens=llm_config['max_tokens'],
+                temperature=llm_config['temperature']
+            )
+        except ValueError as e:
+            print(f"警告：LLM初始化失败 - {e}")
+            print("将使用默认的空LLM客户端")
+            llm_client = None
         
         # 初始化API处理器
         self.api_handler = APIHandler(self.intent_recognizer, self.kg_query, llm_client)
