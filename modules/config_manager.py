@@ -24,9 +24,9 @@ class ConfigManager:
         config = {
             # API配置
             'api': {
-                'deepseek_api_key': os.getenv('DEEPSEEK_API_KEY', 'sk-fbf0cbed7c3e4a778a6aca7379791de4'),
-                'deepseek_model_name': os.getenv('DEEPSEEK_MODEL_NAME', 'deepseek-chat'),
-                'deepseek_base_url': os.getenv('DEEPSEEK_BASE_URL', 'https://api.deepseek.com/v1'),
+                'api_key': os.getenv('DEEPSEEK_API_KEY', 'sk-fbf0cbed7c3e4a778a6aca7379791de4'),
+                'model_name': os.getenv('DEEPSEEK_MODEL_NAME', 'deepseek-chat'),
+                'base_url': os.getenv('DEEPSEEK_BASE_URL', 'https://api.deepseek.com/v1'),
             },
             
             # 模型配置
@@ -38,9 +38,10 @@ class ConfigManager:
             
             # 数据库配置
             'database': {
-                'neo4j_uri': os.getenv('NEO4J_URI', 'bolt://localhost:7687'),
-                'neo4j_username': os.getenv('NEO4J_USERNAME', 'neo4j'),
-                'neo4j_password': os.getenv('NEO4J_PASSWORD', os.getenv('NEO4J_KEY', 'password')),
+                'uri': os.getenv('NEO4J_URI', 'bolt://localhost:7687'),
+                'user_name': os.getenv('NEO4J_USERNAME', 'neo4j'),
+                'password': os.getenv('NEO4J_PASSWORD', os.getenv('NEO4J_KEY', 'password')),
+                'browserUrl': os.getenv('NEO4J_BROWSER_URL', 'http://localhost:7474/browser/'),
                 'connection_timeout': int(os.getenv('NEO4J_TIMEOUT', '30')),
             },
             

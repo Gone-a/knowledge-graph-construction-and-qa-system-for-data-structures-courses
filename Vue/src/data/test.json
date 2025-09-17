@@ -1,0 +1,34 @@
+{
+  "nodes": [
+        {
+            "name": "链表",
+            "symbolSize": 60,
+            "itemStyle": {
+                "color": "#42b983"
+            }
+        },
+        {
+            "name": "插入",
+            "symbolSize": 60,
+            "itemStyle": {
+                "color": "#42b983"
+            }
+        }
+      ],
+  "links":[
+    {
+            "source": "链表",
+            "target": "插入",
+            "label": {
+                "show": true,
+                "formatter": "belg",
+                "fontSize": 12,
+                "color": "#333"
+            },
+            "lineStyle": {
+                "width": 2,
+                "curveness": 0.2
+            }
+      }
+  ]
+}

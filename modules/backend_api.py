@@ -12,7 +12,6 @@ from typing import Dict, Any, Optional
 
 
 
-
 class APIHandler:
     """简化的API处理器
     
@@ -164,7 +163,7 @@ def create_flask_app(api_handler=None) -> Flask:
         return jsonify({"error": "服务器内部错误"}), 500
     
     # 主要的聊天接口 - 兼容前端的 /test 路由
-    @app.route("/test", methods=["POST"])
+    @app.route("/reply", methods=["POST"])
     def chat():
         """聊天接口 - 兼容前端"""
         data = request.get_json()
@@ -176,28 +175,75 @@ def create_flask_app(api_handler=None) -> Flask:
             return jsonify({"message": "消息不能为空"})
         
         # 处理查询
-        result = api_handler.process_query(message)
-        # result = {"message": "测试回复"}
-        
+        # result = api_handler.process_query(message)
+        result = {"message": "测回复"}
+
+        #图的字典
+        graph_dict={}
         # 返回前端期望的格式
-        return jsonify({"message": result["message"]})
+        return jsonify({"message": result["message"],"graph":graph_dict})
     
-    # API地址设置接口 - 兼容前端的 /set_api 路由
+    
     @app.route("/set_api", methods=["POST"])
     def set_api():
         """设置API地址接口 - 兼容前端"""
         data = request.get_json()
-        if not data or 'apiUrl' not in data:
-            return "缺少apiUrl参数", 400
+        print(data)
+        conf={
+            "key":"api",
+            "value":{
+                'api_key': data["apiKey"],
+                'model_name': data["model"],
+                'base_url': data["baseUrl"]
+            }
+        }
+        if conf['value']['api_key'] is not None:
+
+            api_handler.llm_client.ark_api_key=conf['value']['api_key']
+
+        if conf['value']['model_name'] is not None:
+
+            api_handler.llm_client.doubao_model_id=conf['value']['model_name']
+        # TODO 设置api
+
+        return "API设置成功"
         
-        api_url = data['apiUrl'].strip()
-        if not api_url:
-            return "API地址不能为空", 400
-        
-        # 设置API地址
-        api_handler.set_api_url(api_url)
-        return "API地址设置成功"
     
+    @app.route("/set_database", methods=["POST"])
+    def set_database():
+        data = request.get_json()
+        print(data)
+        conf={
+            'key':'database',
+            'value':{
+                'database.user_name':data["username"],
+                'database.password':data["password"],
+                'database.uri':data["boltUrl"],
+                'database.browserUrl':data["browserUrl"]
+            }
+        }
+
+        # TODO 设置数据库
+
+        return "数据库设置成功"
+    
+    @app.route("/switchChat", methods=["POST"])
+    def switchChat():
+        data = request.get_json()
+        # print(data)
+        # data 是 json 格式 [{sender:,test:,timestamp:}]
+        converted = []
+        for item in data:
+            # 假设sender的值是"user"或"assistant"，如果实际情况不同需要调整这里的映射关系
+            converted_item = {
+                "role": item["sender"],
+                "content": item["text"]
+            }
+            converted.append(converted_item)
+            # TODO 改变模型的上下文
+        api_handler.llm_client.history_messages=converted
+        return data
+
     # 健康检查接口
     @app.route("/health", methods=["GET"])
     def health_check():
@@ -208,7 +254,7 @@ def create_flask_app(api_handler=None) -> Flask:
             "system_status": status
         })
     
-    @app.route("/reply", methods=["GET"])
+    @app.route("/test", methods=["GET"])
     def reply():
         return "测试"
     return app
@@ -218,5 +264,3 @@ def create_flask_app(api_handler=None) -> Flask:
 def create_app():
     """创建Flask应用实例"""
     return create_flask_app()
-
-

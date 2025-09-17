@@ -15,7 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from modules.config_manager import get_config_manager
 from modules.intent_recognition import IntentRecognizer
-from modules.knowledge_graph import KnowledgeGraphQuery
+from modules.knowledge_graph_query import KnowledgeGraphQuery
+from modules.run_serve import RunServe
 from modules.backend_api import APIHandler, create_flask_app
 from modules.deepseek_llm import DeepSeekLLM
 
@@ -37,6 +38,15 @@ class KnowledgeGraphApp:
     
     def initialize(self):
         """初始化应用程序"""
+        #初始化服务开启器
+        self.run_serve = RunServe()
+        with self.run_serve.run('neo4j'):
+            pass
+        with self.run_serve.run('Vue'):
+            pass
+        
+        
+
         # 初始化意图识别器
         model_path = self.config.get('model.nlu_model_path')
         self.intent_recognizer = IntentRecognizer(model_path, KNOWLEDGE_BASE)
@@ -44,18 +54,18 @@ class KnowledgeGraphApp:
         # 初始化知识图谱查询器
         db_config = self.config.get_database_config()
         self.kg_query = KnowledgeGraphQuery(
-            db_config['neo4j_uri'],
-            db_config['neo4j_username'], 
-            db_config['neo4j_password']
+            db_config['uri'],
+            db_config['user_name'], 
+            db_config['password']
         )
         
         # 初始化LLM客户端
         api_config = self.config.get_api_config()
         llm_config = self.config.get_llm_config()
         llm_client = DeepSeekLLM(
-            api_key=api_config['deepseek_api_key'],
-            model_name=api_config['deepseek_model_name'],
-            base_url=api_config['deepseek_base_url']
+            api_key=api_config['api_key'],
+            model_name=api_config['model_name'],
+            base_url=api_config['base_url']
         )
         llm_client.set_parameters(
             max_tokens=llm_config['max_tokens'],
